@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { Grid } from "semantic-ui-react";
 import { IActivity } from "../../../app/models/activity";
 import ActivityDetails from "../details/ActivityDetails";
@@ -14,7 +14,10 @@ interface Iprops {
   setSelectedActivity: (activity: IActivity | null) => void;
   createActivity: (activity: IActivity) => void;
   editActivity: (activity: IActivity) => void;
-  deleteActivity: (id: string) => void;
+  deleteActivity: (e: SyntheticEvent<HTMLButtonElement>, id: string) => void;
+  submitting: boolean;
+  target: string;
+
 }
 
 const ActivityDashboard: React.FC<Iprops> = ({
@@ -26,7 +29,9 @@ const ActivityDashboard: React.FC<Iprops> = ({
   setSelectedActivity,
   createActivity,
   editActivity,
-  deleteActivity
+  deleteActivity,
+  submitting,
+  target
 }) => {
   return (
     <Grid>
@@ -35,6 +40,8 @@ const ActivityDashboard: React.FC<Iprops> = ({
           activities={activities}
           selectActivity={selectActivity}
           deleteActivity={deleteActivity}
+          submitting={submitting}
+          target={target}
         ></ActivityList>
       </Grid.Column>
       <Grid.Column width={6}>
@@ -52,6 +59,7 @@ const ActivityDashboard: React.FC<Iprops> = ({
             activity={selectedActivity!} //used to forcefully allow passing null
             editActivity={editActivity}
             createActivity={createActivity}
+            submitting={submitting}
           ></ActivityForm>
         )}
       </Grid.Column>

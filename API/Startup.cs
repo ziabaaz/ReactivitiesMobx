@@ -59,6 +59,8 @@ namespace API
 
             app.UseAuthorization();
 
+            //app.UseExceptionHandler();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
